@@ -1,8 +1,8 @@
 import 'package:ecommerce_app/core/controllers/auth_controllers.dart';
-import 'package:ecommerce_app/core/controllers/theme_controller.dart';
+import 'package:ecommerce_app/core/theme/theme_controller.dart';
 import 'package:ecommerce_app/core/utils/app_strings.dart';
-import 'package:ecommerce_app/core/utils/app_theme.dart';
-import 'package:ecommerce_app/core/view/widgets/splash_screen.dart';
+import 'package:ecommerce_app/core/theme/app_theme.dart';
+import 'package:ecommerce_app/features/intro/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
