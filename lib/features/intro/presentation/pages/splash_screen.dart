@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/core/controllers/auth_controllers.dart';
 import 'package:ecommerce_app/core/utils/app_strings.dart';
-import 'package:ecommerce_app/core/view/widgets/onboarding_screen.dart';
+import 'package:ecommerce_app/features/intro/presentation/pages/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
