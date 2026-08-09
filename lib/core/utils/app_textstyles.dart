@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ApTextStyles {
+class AppTextStyles {
   // heading text styles
   static const TextStyle heading1 = TextStyle(
     fontSize: 32,
@@ -66,7 +66,7 @@ class ApTextStyles {
   }
 
   // helper Function for weight variations
-  static TextStyle withWeight(TextStyle style, FontWeight Weight) {
-    return style.copyWith(fontWeight: Weight);
+  static TextStyle withWeight(TextStyle style, FontWeight weight) {
+    return style.copyWith(fontWeight: weight);
   }
 }
