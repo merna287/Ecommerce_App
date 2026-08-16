@@ -1,0 +1,92 @@
+{
+  "app": {
+    "title": "Fashion Store",
+    "mainScreenTitle": "Main Screen"
+  },
+
+  "splash": {
+    "title": "FASHION",
+    "store": "STORE",
+    "tagline": "Your style, your way"
+  },
+
+  "onboarding": {
+    "title1": "Discover Latest Trends",
+    "description1": "Explore the latest fashion trends and find your perfect style.",
+
+    "title2": "Shop Your Favorites",
+    "description2": "Find your favorite products and add them to your shopping cart.",
+
+    "title3": "Enjoy Your Shopping",
+    "description3": "Enjoy a simple and seamless shopping experience."
+  },
+
+  "buttons": {
+    "skip": "Skip",
+    "next": "Next",
+    "getStarted": "Get Started",
+
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+
+    "save": "Save",
+    "cancel": "Cancel",
+    "retry": "Retry",
+    "continue": "Continue"
+  },
+
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+
+    "fullName": "Full Name",
+    "phone": "Phone Number",
+
+    "welcomeBack": "Welcome Back!",
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember Me",
+
+    "dontHaveAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "continueShopping": "Continue Shopping"
+  },
+
+  "validation": {
+    "emailRequired": "Please enter your email.",
+    "emailInvalid": "Please enter a valid email address.",
+
+    "passwordRequired": "Please enter your password.",
+    "passwordTooShort": "Password must be at least 6 characters.",
+
+    "confirmPasswordRequired": "Please confirm your password.",
+    "passwordsDoNotMatch": "Passwords do not match.",
+
+    "nameRequired": "Please enter your name."
+  },
+
+  "errors": {
+    "server": "Something went wrong with the server.",
+    "network": "Please check your internet connection.",
+    "unknown": "Something went wrong. Please try again."
+  },
+
+  "home": {
+    "title": "Home",
+    "categories": "Categories",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "profile": "Profile",
+    "searchHint": "Search products..."
+  },
+
+  "empty": {
+    "cart": "Your cart is empty.",
+    "wishlist": "Your wishlist is empty.",
+    "products": "No products found."
+  }
+}

@@ -1,8 +1,12 @@
-import 'package:ecommerce_app/core/controllers/auth_controllers.dart';
+import 'package:easy_localization/easy_localization.dart' as easy;
+import 'package:ecommerce_app/core/localization/locale_keys.g.dart';
 import 'package:ecommerce_app/core/utils/app_assets.dart';
 import 'package:ecommerce_app/core/utils/app_colors.dart';
-import 'package:ecommerce_app/core/utils/app_strings.dart';
 import 'package:ecommerce_app/core/utils/app_textstyles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ecommerce_app/features/auth/presentation/views/signin_screen.dart';
+import 'package:ecommerce_app/features/auth/presentation/viewmodels/auth_viewmodel.dart';
+import 'package:ecommerce_app/features/intro/presentation/models/onboarding_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,36 +18,44 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  final _pageController = PageController();
+  final PageController _pageController = PageController();
+
   int _currentPage = 0;
 
   final List<OnboardingItem> _items = [
     OnboardingItem(
       imagePath: AppAssets.onboardingImage1,
-      title: AppStrings.onboardingTitle1,
-      description: AppStrings.onboardingDescription1,
+      titleKey: LocaleKeys.onboarding_title1,
+      descriptionKey: LocaleKeys.onboarding_description1,
     ),
     OnboardingItem(
       imagePath: AppAssets.onboardingImage2,
-      title: AppStrings.onboardingTitle2,
-      description: AppStrings.onboardingDescription2,
+      titleKey: LocaleKeys.onboarding_title2,
+      descriptionKey: LocaleKeys.onboarding_description2,
     ),
     OnboardingItem(
       imagePath: AppAssets.onboardingImage3,
-      title: AppStrings.onboardingTitle3,
-      description: AppStrings.onboardingDescription3,
+      titleKey: LocaleKeys.onboarding_title3,
+      descriptionKey: LocaleKeys.onboarding_description3,
     ),
   ];
 
   void _handleGetStarted() {
-    final AuthControllers authController = Get.find<AuthControllers>();
-    authController.setFirstTimeDone();
-    //Get.off(()=> const MainScreen()); // Navigate to the main screen
+    final AuthViewModel authViewModel = Get.find<AuthViewModel>();
+    authViewModel.setFirstTimeDone();
+    Get.off(() => SignInScreen());
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -56,32 +68,37 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               });
             },
             itemBuilder: (context, index) {
+              final item = _items[index];
+
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    _items[index].imagePath,
-                    height: MediaQuery.of(context).size.height * 0.4,
+                    item.imagePath,
+                    height: 40.h,
                   ),
-                  const SizedBox(height: 40),
+
+                  SizedBox(height: 40.h),
                   Text(
-                    _items[index].title,
+                    easy.tr(item.titleKey),
                     textAlign: TextAlign.center,
                     style: AppTextStyles.withColor(
                       AppTextStyles.heading1,
                       Theme.of(context).textTheme.bodyLarge?.color ??
-                          Colors.black,
+                          AppColors.black,
                     ),
                   ),
-                  const SizedBox(height: 16),
+
+                  SizedBox(height: 16.h),
+
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 32),
+                    padding:EdgeInsets.symmetric(horizontal: 32.w),
                     child: Text(
-                      _items[index].description,
+                      easy.tr(item.descriptionKey),
                       textAlign: TextAlign.center,
                       style: AppTextStyles.withColor(
                         AppTextStyles.bodyLarge,
-                        isDark ? Colors.grey[400]! : Colors.black87,
+                        isDark ? AppColors.grey400 : AppColors.grey600,
                       ),
                     ),
                   ),
@@ -89,8 +106,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               );
             },
           ),
+
           Positioned(
-            bottom: 80,
+            bottom: 80.h,
             left: 0,
             right: 0,
             child: Row(
@@ -99,36 +117,38 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 _items.length,
                 (index) => AnimatedContainer(
                   duration: const Duration(milliseconds: 100),
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  width: _currentPage == index ? 24 : 8,
-                  height: 8,
+                  margin:EdgeInsets.symmetric(horizontal: 4.w),
+                  width: _currentPage == index ? 24.w : 8.w,
+                  height: 8.h,
                   decoration: BoxDecoration(
                     color: _currentPage == index
                         ? Theme.of(context).primaryColor
-                        : (isDark ? Colors.grey[700] : Colors.grey[300]),
-                    borderRadius: BorderRadius.circular(4),
+                        : (isDark ? AppColors.grey700 : AppColors.grey300),
+                    borderRadius: BorderRadius.circular(4.r),
                   ),
                 ),
               ),
             ),
           ),
+
           Positioned(
-            bottom: 16,
-            left: 16,
-            right: 16,
+            bottom: 16.h,
+            left: 16.w,
+            right: 16.w,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                  onPressed: () =>_handleGetStarted(),
+                  onPressed: _handleGetStarted,
                   child: Text(
-                    AppStrings.skip,
+                    easy.tr(LocaleKeys.buttons_skip),
                     style: AppTextStyles.withColor(
                       AppTextStyles.buttonMedium,
-                      isDark ? Colors.grey[400]! : Colors.grey[600]!,
+                      isDark ? AppColors.grey400 : AppColors.grey600,
                     ),
                   ),
                 ),
+
                 ElevatedButton(
                   onPressed: () {
                     if (_currentPage < _items.length - 1) {
@@ -142,18 +162,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).primaryColor,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 32,
-                      vertical: 16,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 32.w,
+                      vertical: 16.h,
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
                   ),
                   child: Text(
                     _currentPage == _items.length - 1
-                        ? AppStrings.getStarted
-                        : AppStrings.next,
+                        ? easy.tr(LocaleKeys.buttons_getStarted)
+                        : easy.tr(LocaleKeys.buttons_next),
                     style: AppTextStyles.withColor(
                       AppTextStyles.buttonMedium,
                       AppColors.white,
@@ -167,16 +187,4 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
     );
   }
-}
-
-class OnboardingItem {
-  final String imagePath;
-  final String title;
-  final String description;
-
-  OnboardingItem({
-    required this.imagePath,
-    required this.title,
-    required this.description,
-  });
 }
