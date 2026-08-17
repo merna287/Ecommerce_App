@@ -6,15 +6,13 @@ import 'package:ecommerce_app/features/auth/domain/repositories/repo/signup_repo
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: SignupRepo)
-class SignupRepositoryImp implements SignupRepo {
+class SignupRepositoryImpl implements SignupRepo {
   final SignupDataSource _dataSource;
 
-  SignupRepositoryImp(this._dataSource);
+  SignupRepositoryImpl(this._dataSource);
 
   @override
-  Future<AppResult<SignupResponseEntity>> signup(
-    SignupRequestEntity request,
-  ) {
+  Future<AppResult<SignupResponseEntity>> signup(SignupRequestEntity request) {
     return _dataSource.signup(request);
   }
 }

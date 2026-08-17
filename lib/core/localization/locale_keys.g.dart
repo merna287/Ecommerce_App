@@ -53,8 +53,8 @@ abstract class LocaleKeys {
   static const auth_createAccount = 'auth.createAccount';
   static const auth_signupToGetStarted = 'auth.signupToGetStarted';
   static const auth_resetPassword = 'auth.resetPassword';
-  static const auth_EnterYourEmailToResetYourPassword =
-      'auth.EnterYourEmailToResetYourPassword';
+  static const auth_enterYourEmailToResetYourPassword =
+      'auth.enterYourEmailToResetYourPassword';
   static const auth_sendResetLink = 'auth.sendResetLink';
   static const auth_checkYourEmail = 'auth.checkYourEmail';
   static const auth_weHaveSentPasswordRecoverInstructionsToYourEmail =

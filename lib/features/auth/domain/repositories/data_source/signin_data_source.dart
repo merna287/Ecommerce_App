@@ -3,7 +3,5 @@ import 'package:ecommerce_app/features/auth/domain/entities/request_entities/sig
 import 'package:ecommerce_app/features/auth/domain/entities/response_entities/signin_response_entity.dart';
 
 abstract class SigninDataSource {
-  Future<AppResult<SigninResponseEntity>> signin(
-    SigninRequestEntity request
-  );
+  Future<AppResult<SigninResponseEntity>> signin(SigninRequestEntity request);
 }

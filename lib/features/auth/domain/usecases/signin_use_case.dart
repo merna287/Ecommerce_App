@@ -10,7 +10,6 @@ class SigninUseCase {
 
   final SigninRepo _repo;
 
-  Future<AppResult<SigninResponseEntity>> call(
-    SigninRequestEntity request,
-  ) => _repo.signin(request);
+  Future<AppResult<SigninResponseEntity>> call(SigninRequestEntity request) =>
+      _repo.signin(request);
 }

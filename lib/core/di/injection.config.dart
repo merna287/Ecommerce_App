@@ -17,8 +17,8 @@ import 'package:ecommerce_app/features/auth/data/repositories/data_source_impl/s
     as _i614;
 import 'package:ecommerce_app/features/auth/data/repositories/repository_impl/signin_repository_impl.dart'
     as _i544;
-import 'package:ecommerce_app/features/auth/data/repositories/repository_impl/signup_repository_imp.dart'
-    as _i997;
+import 'package:ecommerce_app/features/auth/data/repositories/repository_impl/signup_repository_impl.dart'
+    as _i836;
 import 'package:ecommerce_app/features/auth/domain/repositories/data_source/signin_data_source.dart'
     as _i648;
 import 'package:ecommerce_app/features/auth/domain/repositories/data_source/signup_data_source.dart'
@@ -31,7 +31,12 @@ import 'package:ecommerce_app/features/auth/domain/usecases/signin_use_case.dart
     as _i660;
 import 'package:ecommerce_app/features/auth/domain/usecases/signup_use_case.dart'
     as _i413;
+import 'package:ecommerce_app/features/auth/presentation/cubit/auth_cubit.dart'
+    as _i118;
+import 'package:ecommerce_app/features/auth/presentation/viewmodels/auth_view_model.dart'
+    as _i298;
 import 'package:get_it/get_it.dart' as _i174;
+import 'package:get_storage/get_storage.dart' as _i792;
 import 'package:injectable/injectable.dart' as _i526;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -42,6 +47,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.lazySingleton<_i896.SigninApi>(() => _i896.SigninApi());
+    gh.lazySingleton<_i350.SignupApi>(() => _i350.SignupApi());
     gh.lazySingleton<_i648.SigninDataSource>(
       () => _i640.SigninDataSourceImpl(gh<_i896.SigninApi>()),
     );
@@ -55,10 +61,22 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i660.SigninUseCase(gh<_i1048.SigninRepo>()),
     );
     gh.lazySingleton<_i523.SignupRepo>(
-      () => _i997.SignupRepositoryImp(gh<_i723.SignupDataSource>()),
+      () => _i836.SignupRepositoryImpl(gh<_i723.SignupDataSource>()),
     );
     gh.lazySingleton<_i413.SignupUseCase>(
       () => _i413.SignupUseCase(gh<_i523.SignupRepo>()),
+    );
+    gh.lazySingleton<_i118.AuthCubit>(
+      () => _i118.AuthCubit(
+        signinUseCase: gh<_i660.SigninUseCase>(),
+        signupUseCase: gh<_i413.SignupUseCase>(),
+      ),
+    );
+    gh.lazySingleton<_i298.AuthViewModel>(
+      () => _i298.AuthViewModel(
+        authCubit: gh<_i118.AuthCubit>(),
+        storage: gh<_i792.GetStorage>(),
+      ),
     );
     return this;
   }

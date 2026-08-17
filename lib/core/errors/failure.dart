@@ -10,9 +10,7 @@ sealed class Failure {
 }
 
 final class NetworkFailure extends Failure {
-  const NetworkFailure({
-    super.message = 'No internet connection',
-  });
+  const NetworkFailure({super.message = 'No internet connection'});
 }
 
 final class ServerFailure extends Failure {
@@ -27,36 +25,28 @@ final class ServerFailure extends Failure {
 }
 
 final class ParsingFailure extends Failure {
-  const ParsingFailure({
-    super.message = 'Failed to parse response',
-  });
+  const ParsingFailure({super.message = 'Failed to parse response'});
 }
 
 final class CacheFailure extends Failure {
-  const CacheFailure({
-    super.message = 'Cache error',
-  });
+  const CacheFailure({super.message = 'Cache error'});
 }
 
 final class AuthFailure extends Failure {
   final String? code;
 
   const AuthFailure({
-    super.message ="Email or password is incorrect",
+    super.message = 'Email or password is incorrect',
     this.code,
   });
 }
 
 final class ValidationFailure extends Failure {
-  const ValidationFailure({
-    super.message = 'Validation failed',
-  });
+  const ValidationFailure({super.message = 'Validation failed'});
 }
 
 final class UnknownFailure extends Failure {
-  const UnknownFailure({
-    super.message = 'Unknown error',
-  });
+  const UnknownFailure({super.message = 'Unknown error'});
 }
 
 typedef AppResult<T> = Either<Failure, T>;

@@ -78,21 +78,15 @@ class _AppTextFieldState extends State<AppTextField> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: Theme.of(context).primaryColor,
-          ),
+          borderSide: BorderSide(color: Theme.of(context).primaryColor),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.error,
-          ),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.error,
-          ),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
         ),
       ),
     );

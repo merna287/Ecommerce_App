@@ -1,8 +1,7 @@
 abstract final class AppApis {
   AppApis._();
 
-  static const String baseUrl =
-      'https://api.escuelajs.co/api/v1';
+  static const String baseUrl = 'https://api.escuelajs.co/api/v1';
   // Auth
   static const String login = '/auth/login';
   static const String register = '/users';
@@ -16,8 +15,7 @@ abstract final class AppApis {
     return '/users/$id';
   }
 
-  static const String checkUserAvailable =
-      '/users/is-available';
+  static const String checkUserAvailable = '/users/is-available';
 
   // Products
   static const String products = '/products';

@@ -53,7 +53,16 @@
 
     "dontHaveAccount": "Don't have an account?",
     "alreadyHaveAccount": "Already have an account?",
-    "continueShopping": "Continue Shopping"
+    "continueShopping": "Continue Shopping",
+
+    "createAccount": "Create Account",
+    "signupToGetStarted": "Sign up to get started",
+    "resetPassword": "Reset Password",
+    "enterYourEmailToResetYourPassword": "Enter your email to reset your password",
+    "sendResetLink": "Send Reset Link",
+    "checkYourEmail": "Check Your Email",
+    "weHaveSentPasswordRecoverInstructionsToYourEmail": "We have sent password recovery instructions to your email.",
+    "ok": "OK"
   },
 
   "validation": {

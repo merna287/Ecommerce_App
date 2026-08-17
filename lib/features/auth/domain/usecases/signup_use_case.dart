@@ -8,7 +8,6 @@ import 'package:injectable/injectable.dart';
 class SignupUseCase {
   SignupUseCase(this._repo);
   final SignupRepo _repo;
-  Future<AppResult<SignupResponseEntity>> call(
-    SignupRequestEntity request
-    ) => _repo.signup(request);
+  Future<AppResult<SignupResponseEntity>> call(SignupRequestEntity request) =>
+      _repo.signup(request);
 }

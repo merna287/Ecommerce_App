@@ -17,20 +17,14 @@ void main() async {
   await easy.EasyLocalization.ensureInitialized();
   Bloc.observer = AppBlocObserver();
 
-  Get.put(ThemeController());
-
   configureDependencies();
+  Get.put(ThemeController());
   runApp(
     easy.EasyLocalization(
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ar'),
-      ],
+      supportedLocales: const [Locale('en'), Locale('ar')],
       path: 'assets/translations',
       fallbackLocale: const Locale('en'),
-      child: const AppScreenUtilScope(
-        child: MyApp(),
-      ),
+      child: const AppScreenUtilScope(child: MyApp()),
     ),
   );
 }

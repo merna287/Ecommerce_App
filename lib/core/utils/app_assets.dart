@@ -9,5 +9,5 @@ class AppAssets {
   static const String mastercardImage = 'assets/images/mastercard.png';
   static const String shoeImage1 = 'assets/images/shoe.jpg';
   static const String shoeImage2 = 'assets/images/shoe2.jpg';
-  static const String shoesImage = 'assets/images/shoes.jpg';
+  static const String shoesImage = 'assets/images/shoes2.jpg';
 }

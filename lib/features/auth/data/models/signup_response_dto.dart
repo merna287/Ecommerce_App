@@ -1,16 +1,16 @@
 import 'package:ecommerce_app/features/auth/domain/entities/response_entities/signup_response_entity.dart';
 
 class SignupResponseDto {
-  int? id;
-  String? email;
-  String? password;
-  String? name;
-  String? role;
-  String? avatar;
-  String? creationAt;
-  String? updatedAt;
+  final int? id;
+  final String? email;
+  final String? password;
+  final String? name;
+  final String? role;
+  final String? avatar;
+  final String? creationAt;
+  final String? updatedAt;
 
-  SignupResponseDto({
+  const SignupResponseDto({
     this.id,
     this.email,
     this.password,
@@ -21,23 +21,25 @@ class SignupResponseDto {
     this.updatedAt,
   });
 
-  SignupResponseDto.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    email = json['email'];
-    password = json['password'];
-    name = json['name'];
-    role = json['role'];
-    avatar = json['avatar'];
-    creationAt = json['creationAt'];
-    updatedAt = json['updatedAt'];
+  factory SignupResponseDto.fromJson(Map<String, dynamic> json) {
+    return SignupResponseDto(
+      id: json['id'] as int?,
+      email: json['email'] as String?,
+      password: json['password'] as String?,
+      name: json['name'] as String?,
+      role: json['role'] as String?,
+      avatar: json['avatar'] as String?,
+      creationAt: json['creationAt'] as String?,
+      updatedAt: json['updatedAt'] as String?,
+    );
   }
 
   SignupResponseEntity toEntity() => SignupResponseEntity(
-    id: id = 0,
-    email: email = '',
-    password: password = '',
-    name: name= '',
-    role: role= '',
-    avatar: avatar = '',
+    id: id ?? 0,
+    email: email ?? '',
+    password: password ?? '',
+    name: name ?? '',
+    role: role ?? '',
+    avatar: avatar ?? '',
   );
 }

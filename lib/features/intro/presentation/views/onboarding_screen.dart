@@ -1,11 +1,12 @@
 import 'package:easy_localization/easy_localization.dart' as easy;
+import 'package:ecommerce_app/core/di/injection.dart';
 import 'package:ecommerce_app/core/localization/locale_keys.g.dart';
 import 'package:ecommerce_app/core/utils/app_assets.dart';
 import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/utils/app_textstyles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ecommerce_app/features/auth/presentation/views/signin_screen.dart';
-import 'package:ecommerce_app/features/auth/presentation/viewmodels/auth_viewmodel.dart';
+import 'package:ecommerce_app/features/auth/presentation/viewmodels/auth_view_model.dart';
 import 'package:ecommerce_app/features/intro/presentation/models/onboarding_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,7 +42,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   ];
 
   void _handleGetStarted() {
-    final AuthViewModel authViewModel = Get.find<AuthViewModel>();
+    final AuthViewModel authViewModel = getIt<AuthViewModel>();
     authViewModel.setFirstTimeDone();
     Get.off(() => SignInScreen());
   }
@@ -73,10 +74,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    item.imagePath,
-                    height: 40.h,
-                  ),
+                  Image.asset(item.imagePath, height: 0.4.sh),
 
                   SizedBox(height: 40.h),
                   Text(
@@ -92,7 +90,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   SizedBox(height: 16.h),
 
                   Padding(
-                    padding:EdgeInsets.symmetric(horizontal: 32.w),
+                    padding: EdgeInsets.symmetric(horizontal: 32.w),
                     child: Text(
                       easy.tr(item.descriptionKey),
                       textAlign: TextAlign.center,
@@ -117,7 +115,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 _items.length,
                 (index) => AnimatedContainer(
                   duration: const Duration(milliseconds: 100),
-                  margin:EdgeInsets.symmetric(horizontal: 4.w),
+                  margin: EdgeInsets.symmetric(horizontal: 4.w),
                   width: _currentPage == index ? 24.w : 8.w,
                   height: 8.h,
                   decoration: BoxDecoration(

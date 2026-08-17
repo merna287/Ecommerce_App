@@ -1,24 +1,24 @@
+import 'package:ecommerce_app/core/di/injection.dart';
 import 'package:ecommerce_app/core/localization/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/view/main_screen.dart';
 import 'package:ecommerce_app/features/auth/presentation/views/signin_screen.dart';
-import 'package:ecommerce_app/features/auth/presentation/viewmodels/auth_viewmodel.dart';
+import 'package:ecommerce_app/features/auth/presentation/viewmodels/auth_view_model.dart';
 import 'package:ecommerce_app/features/intro/presentation/views/onboarding_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class SplashScreen extends StatefulWidget {
-  SplashScreen({super.key});
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final AuthViewModel authViewModel = Get.find<AuthViewModel>();
+  final AuthViewModel authViewModel = getIt<AuthViewModel>();
   @override
   void initState() {
     super.initState();
@@ -44,8 +44,12 @@ class _SplashScreenState extends State<SplashScreen> {
             end: Alignment.bottomCenter,
             colors: [
               Theme.of(context).primaryColor, // Top color
-              Theme.of(context).primaryColor.withOpacity(0.8), // Middle color
-              Theme.of(context).primaryColor.withOpacity(0.6), // Bottom color
+              Theme.of(
+                context,
+              ).primaryColor.withValues(alpha: 0.8), // Middle color
+              Theme.of(
+                context,
+              ).primaryColor.withValues(alpha: 0.6), // Bottom color
             ],
           ),
         ),
@@ -54,9 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Positioned.fill(
               child: Opacity(
                 opacity: 0.05,
-                child: GridPattern(
-                  color: AppColors.white
-                ),
+                child: GridPattern(color: AppColors.white),
               ),
             ),
 
@@ -110,9 +112,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           child: Column(
                             children: [
                               Text(
-                                easy.tr(
-                                  LocaleKeys.splash_title,
-                                ),
+                                easy.tr(LocaleKeys.splash_title),
                                 style: TextStyle(
                                   color: AppColors.white,
                                   fontSize: 32.sp,
@@ -121,9 +121,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                 ),
                               ),
                               Text(
-                                easy.tr(
-                                  LocaleKeys.splash_store,
-                                ),
+                                easy.tr(LocaleKeys.splash_store),
                                 style: TextStyle(
                                   color: AppColors.white,
                                   fontSize: 32.sp,
@@ -154,12 +152,10 @@ class _SplashScreenState extends State<SplashScreen> {
                     child: Transform.translate(
                       offset: Offset(0, (1 - value) * 20.h), // Slide up effect
                       child: Text(
-                        easy.tr(
-                          LocaleKeys.splash_tagline,
-                        ),
+                        easy.tr(LocaleKeys.splash_tagline),
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: AppColors.white.withOpacity(0.8),
+                          color: AppColors.white.withValues(alpha: 0.8),
                           fontSize: 16.sp,
                           letterSpacing: 2.w,
                           fontWeight: FontWeight.w400,

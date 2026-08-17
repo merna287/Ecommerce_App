@@ -4,8 +4,8 @@ class SignupRequestEntity {
   final String password;
 
   const SignupRequestEntity({
-    this.name='', 
-    this.email='', 
-    this.password=''
-    });
+    this.name = '',
+    this.email = '',
+    this.password = '',
+  });
 }

@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:ecommerce_app/core/localization/locale_keys.g.dart';
 import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/utils/app_textstyles.dart';
-import 'package:ecommerce_app/core/validators/validetor_app.dart';
+import 'package:ecommerce_app/core/validators/validator_app.dart';
 import 'package:ecommerce_app/core/widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +20,7 @@ class ForgetPasswordScreen extends StatelessWidget {
         child: SingleChildScrollView(
           padding: EdgeInsets.all(24),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start ,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               IconButton(
                 onPressed: () => Get.back(),
@@ -39,7 +39,7 @@ class ForgetPasswordScreen extends StatelessWidget {
               ),
               SizedBox(height: 8.h),
               Text(
-                easy.tr(LocaleKeys.auth_EnterYourEmailToResetYourPassword),
+                easy.tr(LocaleKeys.auth_enterYourEmailToResetYourPassword),
                 style: AppTextStyles.withColor(
                   AppTextStyles.bodyLarge,
                   isDark ? AppColors.grey400 : AppColors.grey600,
@@ -58,7 +58,12 @@ class ForgetPasswordScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    showAboutDialog(context: context);
+                    final emailError = ValidatorApp.validateEmail(
+                      _emailController.text.trim(),
+                    );
+                    if (emailError == null) {
+                      showSuccessDialog(context);
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).primaryColor,
@@ -91,21 +96,24 @@ class ForgetPasswordScreen extends StatelessWidget {
           style: AppTextStyles.heading1,
         ),
         content: Text(
-          easy.tr(LocaleKeys.auth_weHaveSentPasswordRecoverInstructionsToYourEmail),
+          easy.tr(
+            LocaleKeys.auth_weHaveSentPasswordRecoverInstructionsToYourEmail,
+          ),
           style: AppTextStyles.bodyMedium,
         ),
         actions: [
           TextButton(
-          onPressed: ()=> Get.back(),
-          child: Text(easy.tr(LocaleKeys.auth_ok),
-          style: AppTextStyles.withColor(
-                      AppTextStyles.buttonMedium,
-                      Theme.of(context).primaryColor,
-              )
+            onPressed: () => Get.back(),
+            child: Text(
+              easy.tr(LocaleKeys.auth_ok),
+              style: AppTextStyles.withColor(
+                AppTextStyles.buttonMedium,
+                Theme.of(context).primaryColor,
+              ),
             ),
           ),
         ],
-      )
+      ),
     );
   }
 }

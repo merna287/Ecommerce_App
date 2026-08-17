@@ -19,19 +19,13 @@ class ServerException extends AppException {
 }
 
 class NetworkException extends AppException {
-  const NetworkException([
-    super.message = 'No internet connection',
-  ]);
+  const NetworkException([super.message = 'No internet connection']);
 }
 
 class ParsingException extends AppException {
-  const ParsingException([
-    super.message = 'Failed to parse response',
-  ]);
+  const ParsingException([super.message = 'Failed to parse response']);
 }
 
 class CacheException extends AppException {
-  const CacheException([
-    super.message = 'Cache error occurred',
-  ]);
+  const CacheException([super.message = 'Cache error occurred']);
 }

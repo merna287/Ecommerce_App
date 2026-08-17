@@ -1,8 +1,7 @@
 const String emailRegexString =
     r"^[a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$";
 
-const String passwordRegexString =
-    r'^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@]{6,}$';
+const String passwordRegexString = r'^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@]{6,}$';
 
 const String usernameRegexString = r'^[a-zA-Z0-9,.-]+$';
 
@@ -38,10 +37,7 @@ abstract final class ValidatorApp {
     return null;
   }
 
-  static String? validateConfirmPassword(
-    String? value,
-    String? password,
-  ) {
+  static String? validateConfirmPassword(String? value, String? password) {
     if (value == null || value.isEmpty) {
       return 'Confirm password cannot be empty';
     }
@@ -91,4 +87,3 @@ abstract final class ValidatorApp {
     return null;
   }
 }
-

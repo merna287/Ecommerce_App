@@ -53,7 +53,16 @@
 
     "dontHaveAccount": "ليس لديك حساب؟",
     "alreadyHaveAccount": "لديك حساب بالفعل؟",
-    "continueShopping": "متابعة التسوق"
+    "continueShopping": "متابعة التسوق",
+
+    "createAccount": "إنشاء حساب",
+    "signupToGetStarted": "سجلي للبدء",
+    "resetPassword": "إعادة تعيين كلمة المرور",
+    "enterYourEmailToResetYourPassword": "أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور",
+    "sendResetLink": "إرسال رابط إعادة التعيين",
+    "checkYourEmail": "تفقدي بريدك الإلكتروني",
+    "weHaveSentPasswordRecoverInstructionsToYourEmail": "لقد أرسلنا تعليمات استعادة كلمة المرور إلى بريدك الإلكتروني",
+    "ok": "حسنًا"
   },
 
   "validation": {
