@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
@@ -22,6 +23,8 @@ class AppButton extends StatelessWidget {
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: Theme.of(context).primaryColor,
+          foregroundColor: AppColors.white,
+          disabledForegroundColor: AppColors.white,
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -31,7 +34,10 @@ class AppButton extends StatelessWidget {
             ? const SizedBox(
                 height: 20,
                 width: 20,
-                child: CircularProgressIndicator(strokeWidth: 2),
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: AppColors.white,
+                ),
               )
             : Text(label),
       ),

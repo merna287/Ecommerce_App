@@ -43,137 +43,123 @@ class SignInScreen extends StatelessWidget {
 
           return Scaffold(
             body: SafeArea(
-              child: Center(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: 520.w),
-                  child: SingleChildScrollView(
-                    padding: EdgeInsets.all(24.w),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        children: [
-                          SizedBox(height: 40.h),
+              child: SingleChildScrollView(
+                padding: EdgeInsets.all(24.h),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 20.h),
 
-                          // Welcome title
-                          Text(
-                            easy.tr(LocaleKeys.auth_welcomeBack),
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.withColor(
-                              AppTextStyles.heading1,
-                              Theme.of(context).textTheme.bodyLarge?.color ??
-                                  AppColors.black,
-                            ),
-                          ),
+                      // Welcome title
+                      Text(
+                        easy.tr(LocaleKeys.auth_welcomeBack),
+                        style: AppTextStyles.withColor(
+                          AppTextStyles.heading1,
+                          Theme.of(context).textTheme.bodyLarge!.color!,
+                        ),
+                      ),
 
-                          SizedBox(height: 8.h),
+                      SizedBox(height: 8.h),
 
-                          // Subtitle
-                          Text(
-                            easy.tr(LocaleKeys.auth_continueShopping),
-                            textAlign: TextAlign.center,
+                      // Subtitle
+                      Text(
+                        easy.tr(LocaleKeys.auth_continueShopping),
+                        style: AppTextStyles.withColor(
+                          AppTextStyles.bodyMedium,
+                          isDark ? AppColors.grey400 : AppColors.grey600,
+                        ),
+                      ),
+
+                      SizedBox(height: 40.h),
+
+                      // Email
+                      AppTextField(
+                        label: easy.tr(LocaleKeys.auth_email),
+                        prefixIcon: Icons.email_outlined,
+                        keyboardType: TextInputType.emailAddress,
+                        controller: _emailController,
+                        validator: ValidatorApp.validateEmail,
+                      ),
+
+                      SizedBox(height: 16.h),
+
+                      // Password
+                      AppTextField(
+                        label: easy.tr(LocaleKeys.auth_password),
+                        prefixIcon: Icons.lock_outlined,
+                        keyboardType: TextInputType.text,
+                        isPassword: true,
+                        controller: _passwordController,
+                        validator: ValidatorApp.validatePassword,
+                      ),
+
+                      SizedBox(height: 8.h),
+
+                      // Forgot Password
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () => Get.to(() => ForgetPasswordScreen()),
+                          child: Text(
+                            easy.tr(LocaleKeys.auth_forgotPassword),
                             style: AppTextStyles.withColor(
                               AppTextStyles.bodyMedium,
+                              Theme.of(context).primaryColor,
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(height: 24.h),
+
+                      // Sign In Button
+                      AppButton(
+                        label: easy.tr(LocaleKeys.auth_signIn),
+                        isLoading: isLoading,
+                        onPressed: () => _handleSignIn(authViewModel),
+                      ),
+
+                      SizedBox(height: 16.h),
+
+                      // Error Message
+                      if (errorMessage.isNotEmpty)
+                        Text(
+                          errorMessage,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.error,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+
+                      SizedBox(height: 24.h),
+
+                      // Sign Up
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            easy.tr(LocaleKeys.auth_dontHaveAccount),
+                            style: AppTextStyles.withColor(
+                              AppTextStyles.buttonMedium,
                               isDark ? AppColors.grey400 : AppColors.grey600,
                             ),
                           ),
-
-                          SizedBox(height: 40.h),
-
-                          // Email
-                          AppTextField(
-                            label: easy.tr(LocaleKeys.auth_email),
-                            prefixIcon: Icons.email_outlined,
-                            keyboardType: TextInputType.emailAddress,
-                            controller: _emailController,
-                            validator: ValidatorApp.validateEmail,
-                          ),
-
-                          SizedBox(height: 16.h),
-
-                          // Password
-                          AppTextField(
-                            label: easy.tr(LocaleKeys.auth_password),
-                            prefixIcon: Icons.lock_outlined,
-                            keyboardType: TextInputType.text,
-                            isPassword: true,
-                            controller: _passwordController,
-                            validator: ValidatorApp.validatePassword,
-                          ),
-
-                          SizedBox(height: 8.h),
-
-                          // Forgot Password
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () =>
-                                  Get.off(() => ForgetPasswordScreen()),
-                              child: Text(
-                                easy.tr(LocaleKeys.auth_forgotPassword),
-                                style: AppTextStyles.withColor(
-                                  AppTextStyles.bodyMedium,
-                                  Theme.of(context).primaryColor,
-                                ),
+                          TextButton(
+                            onPressed: () => Get.to(() => SignUpScreen()),
+                            child: Text(
+                              easy.tr(LocaleKeys.auth_signUp),
+                              style: AppTextStyles.withColor(
+                                AppTextStyles.buttonMedium,
+                                Theme.of(context).primaryColor,
                               ),
                             ),
                           ),
-
-                          SizedBox(height: 24.h),
-
-                          // Sign In Button
-                          AppButton(
-                            label: easy.tr(LocaleKeys.auth_signIn),
-                            isLoading: isLoading,
-                            onPressed: () => _handleSignIn(authViewModel),
-                          ),
-
-                          SizedBox(height: 16.h),
-
-                          // Sign Up
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  easy.tr(LocaleKeys.auth_dontHaveAccount),
-                                  textAlign: TextAlign.center,
-                                  style: AppTextStyles.withColor(
-                                    AppTextStyles.bodyMedium,
-                                    isDark
-                                        ? AppColors.grey400
-                                        : AppColors.grey600,
-                                  ),
-                                ),
-                              ),
-
-                              TextButton(
-                                onPressed: () => Get.off(() => SignUpScreen()),
-                                child: Text(
-                                  easy.tr(LocaleKeys.auth_signUp),
-                                  style: AppTextStyles.withColor(
-                                    AppTextStyles.bodyMedium,
-                                    Theme.of(context).primaryColor,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(height: 16.h),
-
-                          // Error Message
-                          if (errorMessage.isNotEmpty)
-                            Text(
-                              errorMessage,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.error,
-                                fontSize: 14.sp,
-                              ),
-                            ),
                         ],
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),

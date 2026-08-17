@@ -10,7 +10,6 @@ import 'package:ecommerce_app/core/widgets/app_text_field.dart';
 import 'package:ecommerce_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:ecommerce_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:ecommerce_app/features/auth/presentation/viewmodels/auth_view_model.dart';
-import 'package:ecommerce_app/features/auth/presentation/views/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,7 +35,7 @@ class SignUpScreen extends StatelessWidget {
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            Get.off(() => const MainScreen());
+            Get.offAll(() => const MainScreen());
           }
         },
         builder: (context, state) {
@@ -153,7 +152,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                           ),
                           TextButton(
-                            onPressed: () => Get.off(() => SignInScreen()),
+                            onPressed: () => Get.back(),
                             child: Text(
                               easy.tr(LocaleKeys.auth_signIn),
                               style: AppTextStyles.withColor(
