@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
 
-          title: easy.trExists(LocaleKeys.appTitle)
-              ? easy.tr(LocaleKeys.appTitle)
+          title: easy.trExists(LocaleKeys.app_title)
+              ? easy.tr(LocaleKeys.app_title)
               : '',
 
           // Localization

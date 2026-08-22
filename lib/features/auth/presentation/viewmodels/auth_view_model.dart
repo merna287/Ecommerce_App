@@ -46,6 +46,10 @@ class AuthViewModel {
     );
   }
 
+  Future<void> signInWithGoogle() async {
+    await _authCubit.signInWithGoogle();
+  }
+
   Future<void> signUp({
     required String name,
     required String email,

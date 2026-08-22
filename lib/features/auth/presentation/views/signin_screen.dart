@@ -7,6 +7,7 @@ import 'package:ecommerce_app/core/validators/validator_app.dart';
 import 'package:ecommerce_app/core/view/main_screen.dart';
 import 'package:ecommerce_app/core/widgets/app_button.dart';
 import 'package:ecommerce_app/core/widgets/app_text_field.dart';
+import 'package:ecommerce_app/core/widgets/google_icon.dart';
 import 'package:ecommerce_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:ecommerce_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:ecommerce_app/features/auth/presentation/viewmodels/auth_view_model.dart';
@@ -119,6 +120,61 @@ class SignInScreen extends StatelessWidget {
                         label: easy.tr(LocaleKeys.auth_signIn),
                         isLoading: isLoading,
                         onPressed: () => _handleSignIn(authViewModel),
+                      ),
+
+                      SizedBox(height: 16.h),
+
+                      // Divider
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Divider(
+                              color: isDark
+                                  ? AppColors.grey700
+                                  : AppColors.grey300,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12.w),
+                            child: Text(
+                              easy.tr(LocaleKeys.auth_or),
+                              style: AppTextStyles.withColor(
+                                AppTextStyles.bodyMedium,
+                                isDark ? AppColors.grey400 : AppColors.grey600,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Divider(
+                              color: isDark
+                                  ? AppColors.grey700
+                                  : AppColors.grey300,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 16.h),
+
+                      // Continue with Google Button
+                      Semantics(
+                        button: true,
+                        label: easy.tr(LocaleKeys.auth_continueWithGoogle),
+                        child: AppButton(
+                          label: easy.tr(LocaleKeys.auth_continueWithGoogle),
+                          icon: const GoogleIcon(),
+                          backgroundColor: isDark
+                              ? AppColors.surfaceDark
+                              : AppColors.surfaceLight,
+                          foregroundColor: Theme.of(
+                            context,
+                          ).textTheme.bodyLarge!.color!,
+                          borderColor: isDark
+                              ? AppColors.grey700
+                              : AppColors.grey300,
+                          isLoading: isLoading,
+                          onPressed: () => authViewModel.signInWithGoogle(),
+                        ),
                       ),
 
                       SizedBox(height: 16.h),

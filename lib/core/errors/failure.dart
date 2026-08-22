@@ -49,4 +49,8 @@ final class UnknownFailure extends Failure {
   const UnknownFailure({super.message = 'Unknown error'});
 }
 
+final class CancelledFailure extends Failure {
+  const CancelledFailure({super.message = 'Operation cancelled'});
+}
+
 typedef AppResult<T> = Either<Failure, T>;

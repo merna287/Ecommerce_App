@@ -3,8 +3,10 @@ import 'package:ecommerce_app/features/auth/domain/entities/request_entities/sig
 import 'package:ecommerce_app/features/auth/domain/entities/request_entities/signup_request_entity.dart';
 import 'package:ecommerce_app/features/auth/domain/entities/response_entities/signin_response_entity.dart';
 import 'package:ecommerce_app/features/auth/domain/entities/response_entities/signup_response_entity.dart';
+import 'package:ecommerce_app/features/auth/domain/repositories/repo/google_signin_repo.dart';
 import 'package:ecommerce_app/features/auth/domain/repositories/repo/signin_repo.dart';
 import 'package:ecommerce_app/features/auth/domain/repositories/repo/signup_repo.dart';
+import 'package:ecommerce_app/features/auth/domain/usecases/google_signin_use_case.dart';
 import 'package:ecommerce_app/features/auth/domain/usecases/signin_use_case.dart';
 import 'package:ecommerce_app/features/auth/domain/usecases/signup_use_case.dart';
 import 'package:ecommerce_app/features/auth/presentation/cubit/auth_cubit.dart';
@@ -38,15 +40,34 @@ class FakeSignupRepo implements SignupRepo {
   }
 }
 
+class FakeGoogleSigninRepo implements GoogleSigninRepo {
+  final failure.AppResult<SigninResponseEntity> result;
+
+  FakeGoogleSigninRepo(this.result);
+
+  @override
+  Future<failure.AppResult<SigninResponseEntity>> signinWithGoogle() async {
+    return result;
+  }
+}
+
 AuthCubit buildCubit({
-  failure.AppResult<SigninResponseEntity> signinResult =
-      const Right(SigninResponseEntity(accessToken: 'token')),
-  failure.AppResult<SignupResponseEntity> signupResult =
-      const Right(SignupResponseEntity()),
+  failure.AppResult<SigninResponseEntity> signinResult = const Right(
+    SigninResponseEntity(accessToken: 'token'),
+  ),
+  failure.AppResult<SignupResponseEntity> signupResult = const Right(
+    SignupResponseEntity(),
+  ),
+  failure.AppResult<SigninResponseEntity> googleSigninResult = const Right(
+    SigninResponseEntity(accessToken: 'google-token'),
+  ),
 }) {
   return AuthCubit(
     signinUseCase: SigninUseCase(FakeSigninRepo(signinResult)),
     signupUseCase: SignupUseCase(FakeSignupRepo(signupResult)),
+    googleSigninUseCase: GoogleSigninUseCase(
+      FakeGoogleSigninRepo(googleSigninResult),
+    ),
   );
 }
 
@@ -165,6 +186,65 @@ void main() {
         'Enter a valid email address',
       );
       cubit.close();
+    });
+
+    test('emits loading then session success on google sign in', () async {
+      final cubit = buildCubit();
+
+      final expectedStates = expectLater(
+        cubit.stream,
+        emitsInOrder([
+          isA<AuthLoading>(),
+          isA<AuthSuccess>().having(
+            (state) => state.session?.accessToken,
+            'session.accessToken',
+            'google-token',
+          ),
+        ]),
+      );
+
+      await cubit.signInWithGoogle();
+      await expectedStates;
+      await cubit.close();
+    });
+
+    test('emits loading then failure on a failed google sign in', () async {
+      final cubit = buildCubit(
+        googleSigninResult: const Left(
+          failure.AuthFailure(message: 'Google sign-in failed'),
+        ),
+      );
+
+      final expectedStates = expectLater(
+        cubit.stream,
+        emitsInOrder([
+          isA<AuthLoading>(),
+          isA<AuthFailure>().having(
+            (state) => state.message,
+            'message',
+            'Google sign-in failed',
+          ),
+        ]),
+      );
+
+      await cubit.signInWithGoogle();
+      await expectedStates;
+      await cubit.close();
+    });
+
+    test('returns to initial state when google sign in is cancelled', () async {
+      final cubit = buildCubit(
+        googleSigninResult: const Left(failure.CancelledFailure()),
+      );
+
+      final expectedStates = expectLater(
+        cubit.stream,
+        emitsInOrder([isA<AuthLoading>(), isA<AuthInitial>()]),
+      );
+
+      await cubit.signInWithGoogle();
+      await expectedStates;
+      await cubit.close();
     });
   });
 }
