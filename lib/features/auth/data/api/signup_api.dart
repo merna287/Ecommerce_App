@@ -5,7 +5,7 @@ import 'package:ecommerce_app/core/errors/failure.dart';
 import 'package:ecommerce_app/core/errors/safe_api_call.dart';
 import 'package:ecommerce_app/core/network/app_apis.dart';
 import 'package:ecommerce_app/features/auth/data/models/request_dto/signup_request_dto.dart';
-import 'package:ecommerce_app/features/auth/data/models/signup_response_dto.dart';
+import 'package:ecommerce_app/features/auth/data/models/response_dto/signup_response_dto.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 
