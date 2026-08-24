@@ -11,7 +11,11 @@ class GoogleIdentityApi {
   /// cancels the account picker. Any other failure is rethrown.
   Future<GoogleSignInAccount?> signIn() async {
     if (!_initialized) {
-      await _googleSignIn.initialize();
+      await _googleSignIn.initialize(
+      serverClientId: const String.fromEnvironment(
+        'GOOGLE_SERVER_CLIENT_ID',
+      ),
+    );
       _initialized = true;
     }
 
